@@ -35,11 +35,18 @@ public class EscapeLaberinto {
                     break;
 
                 case 2:
+                    int retorno;
                     System.out.println("**********************");
                     tamañoMapa();
                     diseñoMapa();
                     mostrarMapa();
-                    menuPrincipal();
+
+                    System.out.println("Para regresar al Menú Principal presione 1");
+                    retorno = entrada.nextInt();
+
+                    if (retorno == 1) {
+                        menuPrincipal();
+                    }
                     break;
 
                 case 3:
@@ -50,7 +57,7 @@ public class EscapeLaberinto {
 
                 case 4:
                     System.out.println("**********************");
-                    mapasAlmacenados();
+                    visualizarMapas();
                     menuPrincipal();
                     break;
 
@@ -90,65 +97,53 @@ public class EscapeLaberinto {
         }
     }
 
-    public static void creacionMapas() {
-        int eleccion;
-
-        System.out.println("Presione 1 si desea crear un mapa nuevo");
-        System.out.println("Presione 2 si desea regresar al Menu Principal");
-        eleccion = entrada.nextInt();
-
-        if (eleccion == 1) {
-            tamañoMapa();
-
-        } else {
-            System.out.println("Regresando al Menú Principal ... ...");
-            menuPrincipal();
-        }
-
-    }
-
     public static void juego() {
         reportesFinales();
 
     }
 
-    public static void mapasAlmacenados() {
-        int indice = 0;
-        int regresar;
-        String nombreMapa[] = new String[indice];
-        int mapaCreado[] = new int[indice];
+    public static String mapas[][][] = new String[30][][];
 
-        indice += 1;
+    public static void mapaPrincipal() {
+        char principal[][] = new char[30][30];
 
-        System.out.println("Regresar al Menú Principal: 1");
-        regresar = entrada.nextInt();
+        for(int i=0; i< principal.length;i++) {
+            for(int j=0;j<principal.length;j++) {
+                System.out.print(principal[i][j]);
+            }
+            System.out.println();
+        }
 
-        if (regresar == 1) {
-            menuPrincipal();
-        } else {
-            mapasAlmacenados();
+        
+        for (int i = 0; i < principal.length; i++) {
+            for (int j = 0; j < principal.length; j++) {
+                System.out.println(principal[i][j]);
+            }
+            
         }
     }
-
-    public static String mapas[][][] = new String[30][][];
 
     public static void tamañoMapa() {
         int numeroFilas;
         int numeroColumnas;
-        String nombreMapa;
-        int catidadMapa = 1;
+        int posicion = 0;
+        int indice = 1;
+        String nombreMapa[] = new String[30];
 
-        System.out.print("Escriba un nombre con el que desea guardar el mapa: ");
-        nombreMapa = entrada.next();
+        System.out.println("El mapa que va a crear se guardará en la posición: " + indice);
+        indice += 1;
 
-        System.out.println("Defina el tamaño del laberinto que desea ingresando los siguientes datos:");
-        System.out.print("Número de filas: ");
-        numeroFilas = entrada.nextInt();
-        System.out.print("Número de columnas: ");
-        numeroColumnas = entrada.nextInt();
-        System.out.println("");
-        mapas[catidadMapa] = new String[numeroFilas][numeroColumnas];
-
+        for (int i = 1; i < mapas.length; i++) {
+            System.out.println("Posición: " + i);
+            System.out.println("Para crear un nuevo mapa ingrese los siguientes datos:");
+            System.out.print("Número de filas: ");
+            numeroFilas = entrada.nextInt();
+            System.out.print("Número de columnas: ");
+            numeroColumnas = entrada.nextInt();
+            mapas[i] = new String[numeroFilas][numeroColumnas];
+        }
+        System.out.print("Ingrese un nombre para guardar el mapa: ");
+        nombreMapa[indice] = entrada.next();
     }
 
     public static void diseñoMapa() {
@@ -163,24 +158,19 @@ public class EscapeLaberinto {
         int tipo;
 
         for (int i = 0; i < mapas.length; i++) {
-            System.out.println("Fila: " + i);
-            System.out.println("Para crear el mapa de juego indice:\n1.Número de casillas vacias\n2.Oro\n3.Salida\n3.Pared");
-            tipo = entrada.nextInt();
-
-            if (tipo == 1) {
-                caracter = casilla;
-            } else if (tipo == 2) {
-                caracter = oro;
-            } else if (tipo == 3) {
-                caracter = salida;
-            } else {
-                caracter = pared;
-            }
-
             for (int j = 0; j < mapas[i].length; j++) {
-                for (int k = 0; k < mapas.length; k++) {
-                    mapas[i][j][k] = caracter;
+                for (int k = 0; k < mapas[i][j].length; k++) {
+                    System.out.println("Ingrese que desea colocar en la casilla :" + mapas[i][j][k]);
+                    System.out.println("1. Casilla vacia\n2. Pared\n3. Salida");
+                    tipo = entrada.nextInt();
 
+                    if (tipo == 1) {
+                        mapas[i][j][k] = casilla;
+                    } else if (tipo == 2) {
+                        mapas[i][j][k] = pared;
+                    } else if (tipo == 3) {
+                        mapas[i][j][k] = salida;
+                    }
                 }
             }
         }
@@ -195,6 +185,24 @@ public class EscapeLaberinto {
                 System.out.println("");
             }
             System.out.println("");
+        }
+    }
+
+    public static void visualizarMapas() {
+        int indice = 0;
+        int regresar;
+        String nombreMapa[] = new String[indice];
+        int mapaCreado[] = new int[indice];
+        
+        mapaPrincipal();
+
+        System.out.println("Regresar al Menú Principal: 1");
+        regresar = entrada.nextInt();
+
+        if (regresar == 1) {
+            menuPrincipal();
+        } else {
+            visualizarMapas();
         }
     }
 
