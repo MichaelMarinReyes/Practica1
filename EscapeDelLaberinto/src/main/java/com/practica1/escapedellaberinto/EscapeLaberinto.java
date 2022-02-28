@@ -58,7 +58,7 @@ public class EscapeLaberinto {
 
                 case 4:
                     System.out.println("**********************");
-                    mapasGuardados();
+
                     menuPrincipal();
                     break;
 
@@ -117,8 +117,7 @@ public class EscapeLaberinto {
         int posicionBot;
         int atrapado = 0;
         int visto = 0;
-        
-        
+
     }
 
     public static void posicionJugador() {
@@ -172,7 +171,7 @@ public class EscapeLaberinto {
             System.out.println("");
         }
         System.out.println("");
-        
+
     }
 
     public static void tamañoMapa() {
@@ -180,12 +179,8 @@ public class EscapeLaberinto {
         int columnas;
         int indice = 1;
         int cantidadMapas = 30;
-        String nombre;
 
         System.out.println("Posición: " + indice);
-        System.out.print("Escriba un nombre con el que desea guardar el mapa: ");
-        nombre = entrada.next();
-        nombre = nombres[indice];
         System.out.println("Para definir el tamaño del mapa ingrese los siguientes datos");
         System.out.print("Número de filas: ");
         filas = entrada.nextInt();
@@ -199,7 +194,10 @@ public class EscapeLaberinto {
         char salida = 'S';
         final char PARED = '#';
         int tipo;
+        String nombre;
 
+        System.out.print("Escriba un nombre con el que desea guardar el mapa: ");
+        nombre = entrada.next();
         for (int i = 0; i < mapas.length; i++) {
             for (int j = 0; j < mapas.length; j++) {
                 System.out.println("Puede usar los siguientes elementos para crear el mapa");
@@ -217,6 +215,7 @@ public class EscapeLaberinto {
             }
         }
         System.out.println("**MAPA CREADO**");
+        System.out.println(nombre);
     }
 
     public static void mostrarMapa() {
@@ -236,10 +235,10 @@ public class EscapeLaberinto {
         String nombreMapa[] = new String[indice];
         int mapaCreado[] = new int[indice];
         String nombrePrincipal = "Mapa Inicial";
-        
+
         nombreMapa[0] = nombrePrincipal;
         mapaPrincipal();
-        
+
         System.out.println(nombreMapa[0]);
         System.out.println(mapaCreado[0]);
 
