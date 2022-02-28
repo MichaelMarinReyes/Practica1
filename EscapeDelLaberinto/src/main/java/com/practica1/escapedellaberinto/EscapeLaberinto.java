@@ -68,7 +68,7 @@ public class EscapeLaberinto {
                     break;
 
                 default:
-                    System.out.println("Número de opcion ingresado invalido");
+                    System.out.println("Número de opcion ingresado invalido\nIntente nuevamente");
             }
 
         } while (opcion != 5);
@@ -86,9 +86,7 @@ public class EscapeLaberinto {
         System.out.println("Elejir un mapa");
         mapaPrincipal();
         mostrarMapa();
-        juego();
-        comandos();
-        reportesFinales();
+        partida();
 
         System.out.println("1. Regresar al Menu Principal");
         subMenu = entrada.nextInt();
@@ -99,14 +97,28 @@ public class EscapeLaberinto {
         }
     }
 
-    public static void juego() {
+    public static void partida() {
+        int posicionJugador;
+        int posicionBot;
+        int posicionOro;
+        int turnoBot;
+
+        System.out.println("Turno: Jugador");
+        comandos();
+
+        System.out.println("Turno Bot");
+        bot();
+
         reportesFinales();
 
     }
 
     public static void bot() {
-        int posición;
-
+        int posicionBot;
+        int atrapado = 0;
+        int visto = 0;
+        
+        
     }
 
     public static void posicionJugador() {
@@ -118,12 +130,9 @@ public class EscapeLaberinto {
     public static String nombres[] = new String[30];
 
     public static void mapaPrincipal() {
-        String nombreInicial = "Mapa Inicial";
         char casilla = 'O';
         char pared = '#';
         char salida = 'S';
-
-        System.out.println(nombreInicial);
 
         char mapa[][] = {{'#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
         {'S', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'S'},
@@ -163,7 +172,7 @@ public class EscapeLaberinto {
             System.out.println("");
         }
         System.out.println("");
-
+        
     }
 
     public static void tamañoMapa() {
@@ -227,6 +236,12 @@ public class EscapeLaberinto {
         String nombreMapa[] = new String[indice];
         int mapaCreado[] = new int[indice];
         String nombrePrincipal = "Mapa Inicial";
+        
+        nombreMapa[0] = nombrePrincipal;
+        mapaPrincipal();
+        
+        System.out.println(nombreMapa[0]);
+        System.out.println(mapaCreado[0]);
 
         System.out.println("Regresar al Menú Principal: 1");
         regresar = entrada.nextInt();
@@ -330,6 +345,7 @@ public class EscapeLaberinto {
         int movimientosRealizados = 0;
         int movimientosBot = 0;
         int vistoPorBot = 0;
+        int vecesAtrapado;
 
         System.out.println("*Estadísticas finales*");
         System.out.println("Oro recolectado: " + oroRecolectado);

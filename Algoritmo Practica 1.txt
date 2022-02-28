@@ -1,0 +1,384 @@
+--ALGORITMO ESCAPE DEL LABERINTO--
+
+INICIO EscapeLaberinto
+
+Escribir "*ESCAPE DEL LABERINTO*"
+
+Llamar menuPrincipal()
+
+FIN
+
+-----
+
+Inicio Proceso menuPrincipal
+Var opcion
+
+Hacer
+	Escribr "-Menu de Juego-"
+	Escribir "1. Jugar "
+	Escribir "2. Crear Mapa"
+	Escribir "3. Reportes"
+	Escribir "4. Visualizar Mapas"
+	Escribir "5. Salir"
+	Leer(opcion)
+	
+	
+
+	Si (opcion == 1) entonces
+		Llamar jugar()
+		
+	sino si (opcion = 2) entonces
+		Llamar tamañoMapa()
+		Llamar diseñoMapa()
+		Llamar mostrarMapa()
+		
+	sino si (opcion = 3) entonces
+		Llamar reportesFinales()
+		Escribir "--------------"
+		Llamar reporteGeneral()
+		
+	sino si (opcion = 4) entonces
+		Llamar mostrarMapa()
+		
+	sino si (opcion == 5) entonces
+		Escribir "Saliendo del Juego"
+	sino 
+		Escribir "Número de opción ingresado inválido"
+	
+	Finsi
+		
+	
+Mientras (opcion != 5)
+
+
+Fin
+
+----
+
+Inicio Proceso jugar()
+Var seleccion
+Var mapaSeleccionado
+
+Escribir "Elija un Mapa"
+Llamar mapasAlmacenados(mapaSeleccionado)
+LLamar partida()
+
+Escribir "1. Regresar al menu de juego"
+Leer(seleccion)
+
+Si (seleccion = 1) entonces
+	Llamar menu()
+sino
+	Llamar jugar
+Finsi	
+
+Fin
+
+---
+
+Inicio Proceso partida()
+Var posiciónJugador
+Var posiciónBot
+Var posicionOro
+Var turnoJugador
+Var turnoBot
+
+posicionjugador = Llamar funcion aleatorio(posicionJugador)
+
+Hacer
+	Escribir "Turno: Jugador"
+	Llamar comandos(posicionJugador, posicionBot)
+
+	Escribir "Turno: Bot" 
+	Llamar funcion random(comandos(posicionJugador, posicionBot))
+	
+	
+Mientras ()
+
+Llamar reportesFinales()
+
+Fin
+
+---
+
+Inicio Proceso bot()
+Var atrapado
+Var posicionBot
+Var visto
+
+Fin
+
+---
+
+Inicio Proceso mapaInicial()
+Var nombreInicial = "Mapa Inicial"
+
+mapas[][] = {{'#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#','#', '#', '#', '#'},
+	{'S', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'S'},
+	{'#', '#', '#', '#', '#', '#', 'O', 'O', '#', '#', '#', 'O', '#', '#', '#', 'O', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', 'O', 'O', '#', 'O', '#'},
+	{'#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', '#', 'O', 'O', 'O', '#'},
+	{'#', 'O', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#'},
+        {'#', 'O', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
+        {'#', 'O', '#', '#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', '#', '#'},
+        {'#', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', '#', 'O', '#', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', '#', 'O', '#'},
+        {'#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#'},
+        {'#', 'O', '#', '#', 'O', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#', '#', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
+        {'#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
+        {'#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#'},
+        {'#', 'O', 'O', '#', 'O', 'O', '#', '#', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#'},
+        {'#', '#', 'O', '#', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
+        {'#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#'},
+        {'#', '#', 'O', '#', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', '#', '#', '#', 'O', '#'},
+        {'#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
+        {'#', '#', 'O', 'O', 'O', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', '#', 'O', '#'},
+        {'#', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', 'O', 'O', 'O', '#'},
+        {'#', 'O', '#', 'O', 'O', 'O', '#', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', '#', 'O', '#', 'O', '#'},
+        {'#', 'O', '#', '#', '#', '#', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', 'O', '#', 'O', '#', '#', '#'},
+        {'#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'S'},
+        {'#', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', '#', '#'},
+        {'#', '#', '#', '#', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
+        {'#', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', 'O', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', '#'},
+        {'#', 'O', '#', '#', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', '#', 'O', '#', 'O', '#', '#', 'O', '#'},
+        {'#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', '#'},
+        {'#', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', '#', '#', 'O', '#', 'O', '#', '#', '#', '#', '#', 'O', 'O', 'O', '#', '#'},
+        {'#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#'},
+        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',},};
+    
+
+Desde i = 0; hasta mapas[][]; 1
+
+	Desde j = 0; hasta mapas[][]; 1
+			Escribir mapas[i][j]
+	Findesde
+	Escribir ""
+FindesdeE
+Escribir ""
+
+Llamar mapasGuardados(mapas[i][j])
+Fin
+
+---
+
+Inicio Proceso mapasGuardados(mapas[i][j], nombreMapa)
+Var indice = 0
+Var nombreMapa[indice]
+Var posicionGuardado[indice]
+Var regresar
+
+mapas[i][j] = indice
+nombreMapa
+Escribir "Regresar al Menú Principal: 1"
+Leer regresar
+
+Si (regresar == 1) entonces
+	menuPrincipal()
+sino
+	Llamar mapasGuardados()
+Finsi
+Fin
+
+---
+
+mapas[][][]
+
+Inicio Proceso tamañoMapa()
+Var filas
+Var columnas
+Var indice = 1
+Var cantidadMapas
+Var mapasGuardados[30]
+Var nombre
+Var nombres[]
+Var nombreMapa
+var posicion = 0
+Var cantidadMapas
+
+Escribir "En este espacio puede definir la cantidad de mapas que desea crear, ingrese una cantidad: "
+Leer cantidadMapas
+mapas [][]
+
+Escribir "Posición " + indice
+Escribir "Escriba un nombre con el que desea guardar el mapa: "
+Leer nombre
+nombre = nombres[indice]
+Escribir "Para definir el tamaño del mapa ingrese los siguientes datos"
+Escribir "Número de filas: "
+Leer filas
+Escribir "Número de columnas: "
+Leer columnas
+
+mapas[filas][columnas]
+
+Fin
+
+---
+
+Inicio Proceso diseñoMapa()
+Var casilla = O
+Var cantidadOroSalida
+Var salida = S
+Var PARED = #
+Var salidas = 0
+Var tipo
+
+Desde i = 0; hasta mapas[][]; 1
+	Desde j = 0;hasta mapas[][]; 1
+		Escibir "Puede usar los siguientes elementos para crear el mapa"
+		Escribir "1. Pared"
+		Escribir "2. Casilla vacia"
+		Escribir "3. Salida"
+		Escribir "Casilla: |" + (i + 1) + "||" + (j + 1) + "| "
+		Leer tipo
+                  
+		Si (tipo == 1) entonces
+			mapas[i][j] = pared
+		sino si (tipo == 2) entonces
+			mapas[i][j] = casilla
+		sino si (tipo == 3) entonces
+			Escribir "Cantidad de oro para usar esta salida: "
+			Leer cantidadOroSalida
+			mapas[i][j] = salida
+		Finsi
+	Findesde
+Findesde
+Escribir "Guarde el mapa con un nombre: "
+Leer nombreMapa
+mapasGuardados(mapas[i][j], nombreMapa)
+Escribir "**MAPA CREADO**"
+Fin
+
+---
+
+Inicio Proceso mostrarMapa()
+
+Desde i = 0; hasta mapas[][]; 1
+
+	Desde j = 0; hasta mapas[][]; 1
+			Escribir mapas[i][j]
+	Findesde
+	Escribir ""
+FindesdeE
+Escribir ""
+
+Fin
+
+---
+
+Inicio Proceso comandos(posicionJugador, posicioBot)
+Var comando
+
+Escribir "Ingrese un comando"
+Escribir "Puede escribir algunos de los siguientes comandos en mayúscula y minúscula"
+Escribir "ORO_REQUERIDO = Muestra cantidad de oro que se necesita para las salidas del laberinto"
+Escribir "ORO = Muestra la cantidad de oro que posee"
+Escribir "MOVER = Para avanzar posiciónes"
+Escribir "LEVANTAR = Para levantar el oro encontrado"
+Escribir "MIRAR = Muestra la posición del Jugador y los caminos que podría seguir"
+Escribir "SALIR = Al llegar a una de las salidas puede ingresar el comando y terminar el juego"
+Leer (comando)
+
+
+Si (comando == ORO_REQUERIDO || comando == oro_requerido) entonces
+	Var cantidadOro
+	Var oro
+
+	Escribir "Oro actual: " + oro
+
+sino si (comando == ORO || comando == oro) entonces
+	LlamaroroRequerido()
+
+sino si (comando == MOVER || comando == mover) entonces
+	Var direccion
+	Var posicion
+
+	Escribir "Para moverse a alguna dirección debe escribir MOVER ó mover seguidamente de la dirección que desea tomar"
+	Escribir "Ejemplo: MOVER A"
+	Escribir "Para moverse una casilla hacia arriba puede escribir A ó a"
+	Escribir "Para moverse una casilla hacia abajo puede escribir  S ó s"
+	Escribir "Para moverse una casilla hacia la derecha puede escribir E ó e"
+	Escribir "Para moverse una casilla hacia la izquierda puede escribir O u o"
+	Leer (direccion)
+
+	Si (direccion == A || direccion == a) entonces
+		posicion = mapas[i - 1][j]
+		
+	sino si (direccion == S || direccion == s) entonces
+		posicion = mapas[i + 1][j]
+	sino si (direccion == E || direccion == e) entonces
+		posicion = mapas[i][j + 1]
+	sino si (direccion == O || direccion == o) entonces
+		posicion = mapas[i][j - 1]
+	Finsi
+
+sino si (comando == LEVANTAR || comando == levantar) entonces
+	Llamar levantar()
+sino si (comando == MIRAR || comando == mirar) entonces
+	Var oroTotal
+
+	Escribir "Oro: " + oroTotal
+sino si (comando == SALIR || comando == salir) entonces
+	Si (cantidadOro == partida(cantidadOroSalida) entonces
+		Escribir "*Felicidades ha ganado la partida"
+	sino
+		Escribir "No cuenta con la cantidad suficiente de oro para usar esta salida"
+	Finsi
+
+sino 
+	Escribir "El comando ingresado inexistente"
+Finsi
+
+Fin
+
+---
+
+Inicio Proceso levantar()
+Var oroLevantado
+
+Si (oroLevandaro == ) entonces
+	Escribir "Oro levantado:  " + oroLevantado
+sino 
+	Escribir "La casilla se encuentra vacia no ha recogido oro"
+Finsi
+
+Fin
+---
+
+Inicio Proceso reportesFinales()
+Var oroRecolectado
+Var movimientosRealizados
+Var movimientosBot
+Var vistoPorBot
+
+Escribir "Estadísticas finales"
+Escribir "Oro recolectado: "
+Escribir "Movimientos realizados: "
+Escribir "Movimientos realizados por el bot: "
+Escribir "Intentos de captura: "
+Escribir "Veces vistas por el bot: "
+
+Fin
+
+---
+
+Inicio Proceso reporteGeneral()
+Var vecesAtrapado
+Var partidasGanadas
+Var promedioOro
+Var promedioMovimientos
+Var mapaMasJugado
+Var masPerdido
+Var masGanado
+Var mapasCreados
+
+Escribir "Estadísticas Generales"
+Escribir "Cantidad de veces atrapado: "
+Escribir "Cantidad de partidas ganadas: "
+Escribir "Oro promedio por partida: "
+Escribir "Promedio de movimientos: "
+Escribir "Mapa más jugado: "
+Escribir "Mapa más perdido: "
+Escribir "Mapa más ganado: "
+Escribir "Total de mapas creados: "
+
+
+Fin
