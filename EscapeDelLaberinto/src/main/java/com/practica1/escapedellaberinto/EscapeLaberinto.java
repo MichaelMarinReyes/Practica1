@@ -344,7 +344,6 @@ public class EscapeLaberinto {
         int movimientosRealizados = 0;
         int movimientosBot = 0;
         int vistoPorBot = 0;
-        int vecesAtrapado;
 
         System.out.println("*Estadísticas finales*");
         System.out.println("Oro recolectado: " + oroRecolectado);
