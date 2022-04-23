@@ -11,9 +11,9 @@ public class EscapeLaberinto {
     static Scanner entrada = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("**********************");
+        System.out.println("**************************");
         System.out.println("*ESCAPE DEL LABERINTO*");
-        System.out.println("**********************");
+        System.out.println("**************************");
 
         menuPrincipal();
 
@@ -22,22 +22,20 @@ public class EscapeLaberinto {
     public static void menuPrincipal() {
         int opcion;
 
-        do {
-            System.out.println("\n-Menú Principal-");
-            System.out.println("1. Jugar\n2. Crear Mapa\n3. Reportes\n4. Visualizar Mapas\n5. Salir");
-            opcion = entrada.nextInt();
-
+        System.out.println("\n-Menú Principal-");
+        System.out.println("1. Jugar\n2. Crear Mapa\n3. Reportes\n4. Visualizar Mapas\n5. Salir");
+        opcion = entrada.nextInt();
+        
+        if (opcion <= 5) {
             switch (opcion) {
                 case 1:
                     System.out.println("**********************");
                     jugar();
-
                     break;
 
                 case 2:
                     int retorno;
                     System.out.println("**********************");
-
                     tamañoMapa();
                     diseñoMapa();
                     mostrarMapa();
@@ -58,7 +56,7 @@ public class EscapeLaberinto {
 
                 case 4:
                     System.out.println("**********************");
-
+                    //mostrar mapas
                     menuPrincipal();
                     break;
 
@@ -69,9 +67,15 @@ public class EscapeLaberinto {
 
                 default:
                     System.out.println("Número de opcion ingresado invalido\nIntente nuevamente");
+                    menuPrincipal();
+                    break;
             }
 
-        } while (opcion != 5);
+        } else {
+            while (opcion > 5) {
+                menuPrincipal();
+            }
+        }
 
     }
 
@@ -124,14 +128,11 @@ public class EscapeLaberinto {
 
     }
 
-    public static char mapas[][];
+    public static String mapas[][];
     public static char mapasGuardados[] = new char[30];
     public static String nombres[] = new String[30];
 
     public static void mapaPrincipal() {
-        char casilla = 'O';
-        char pared = '#';
-        char salida = 'S';
 
         char mapa[][] = {{'#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
         {'S', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'S'},
@@ -186,13 +187,14 @@ public class EscapeLaberinto {
         filas = entrada.nextInt();
         System.out.print("Número de columnas: ");
         columnas = entrada.nextInt();
-        mapas = new char[filas][columnas];
+        mapas = new String[filas][columnas];
+
     }
 
     public static void diseñoMapa() {
-        char casilla = 'O';
-        char salida = 'S';
-        final char PARED = '#';
+        String casilla = "O";
+        String salida = "S";
+        final String PARED = "#";
         int tipo;
         String nombre;
 
@@ -216,6 +218,8 @@ public class EscapeLaberinto {
         }
         System.out.println("**MAPA CREADO**");
         System.out.println(nombre);
+        
+
     }
 
     public static void mostrarMapa() {
@@ -229,27 +233,8 @@ public class EscapeLaberinto {
         System.out.println("");
     }
 
-    public static void mapasGuardados() {
+    public static void guardarMapa(String[] mapaCreado) {
         int indice = 0;
-        int regresar;
-        String nombreMapa[] = new String[indice];
-        int mapaCreado[] = new int[indice];
-        String nombrePrincipal = "Mapa Inicial";
-
-        nombreMapa[0] = nombrePrincipal;
-        mapaPrincipal();
-
-        System.out.println(nombreMapa[0]);
-        System.out.println(mapaCreado[0]);
-
-        System.out.println("Regresar al Menú Principal: 1");
-        regresar = entrada.nextInt();
-
-        if (regresar == 1) {
-            menuPrincipal();
-        } else {
-            mapasGuardados();
-        }
     }
 
     public static void comandos() {
