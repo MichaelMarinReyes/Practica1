@@ -10,9 +10,8 @@ public class EscapeLaberinto {
 
     public static int cantidadMapas = 20;
     public static String mapas[][];
-    public static String nombres[];
+    public static String[] nombres;
     public static String[][][] mapasGuardados;
-
     static Scanner entrada = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -43,7 +42,7 @@ public class EscapeLaberinto {
                     System.out.println("**********************");
                     tamañoMapa();
                     diseñoMapa();
-                    mostrarMapa();
+                    mostrarMapaCreado();
 
                     System.out.println("Para regresar al Menú Principal presione 1");
                     retorno = entrada.nextInt();
@@ -61,7 +60,7 @@ public class EscapeLaberinto {
 
                 case 4:
                     System.out.println("**********************");
-                    //mostrar mapas
+                    mostrarListadoMapas();
                     menuPrincipal();
                     break;
 
@@ -94,7 +93,7 @@ public class EscapeLaberinto {
 
         System.out.println("Elejir un mapa");
         mapaPrincipal();
-        mostrarMapa();
+        mostrarMapaCreado();
         partida();
 
         System.out.println("1. Regresar al Menu Principal");
@@ -134,7 +133,7 @@ public class EscapeLaberinto {
     }
 
     public static void mapaPrincipal() {
-
+        int indice = 0;
         String mapas[][] = {{"#", "#", "#", "#", "#", "#", "#", "#", "S", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"},
         {"S", "O", "O", "O", "O", "O", "O", "#", "O", "O", "O", "O", "O", "O", "O", "O", "O", "#", "O", "O", "O", "O", "O", "O", "O", "O", "#", "O", "O", "S"},
         {"#", "#", "#", "#", "#", "#", "O", "O", "#", "#", "#", "O", "#", "#", "#", "O", "#", "O", "O", "#", "#", "#", "#", "#", "#", "O", "O", "#", "O", "#"},
@@ -166,7 +165,7 @@ public class EscapeLaberinto {
         {"#", "O", "O", "O", "O", "O", "O", "#", "O", "O", "O", "O", "#", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "#", "O", "O", "#"},
         {"#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "S", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"}};
 
-        guardarMapa(mapas, "Mapa Principal");
+        guardarMapa(indice, mapas, "Mapa Principal");
     }
 
     public static void tamañoMapa() {
@@ -174,14 +173,14 @@ public class EscapeLaberinto {
         int columnas;
         int indice = 1;
 
-        System.out.println("Posición: " + (indice+1));
+        System.out.println("Posición: " + (indice + 1));
         System.out.println("Para definir el tamaño del mapa ingrese los siguientes datos");
         System.out.print("Número de filas: ");
         filas = entrada.nextInt();
         System.out.print("Número de columnas: ");
         columnas = entrada.nextInt();
         mapas = new String[filas][columnas];
-
+        indice++;
     }
 
     public static void diseñoMapa() {
@@ -190,6 +189,7 @@ public class EscapeLaberinto {
         final String PARED = "#";
         int tipo;
         String nombre;
+        int indice = 1;
 
         System.out.print("Escriba un nombre con el que desea guardar el mapa: ");
         nombre = entrada.next();
@@ -212,10 +212,11 @@ public class EscapeLaberinto {
         System.out.println("**MAPA CREADO**");
         System.out.println(nombre);
 
-        guardarMapa(mapas, nombre);
+        guardarMapa(indice, mapas, nombre);
+        indice++;
     }
 
-    public static void mostrarMapa() {
+    public static void mostrarMapaCreado() {
 
         for (int i = 0; i < mapas.length; i++) {
             for (int j = 0; j < mapas.length; j++) {
@@ -226,13 +227,29 @@ public class EscapeLaberinto {
         System.out.println("");
     }
 
-    public static void guardarMapa(String[][] mapaCreado, String nombre) {
+    public static void guardarMapa(int posicion, String[][] mapaCreado, String nombre) {
         int indice = 1;
+        nombres = new String[cantidadMapas];
         mapasGuardados = new String[cantidadMapas][][];
 
         nombres[indice] = nombre;
         mapasGuardados[indice] = mapas;
+        indice++;
+    }
 
+    public static void mostrarListadoMapas() {
+        for (int i = 0; i < mapas.length; i++) {
+            System.out.println("Mapa número: " + (i + 1) + "\tNombre: " + nombres[i]);
+            for (int j = 0; j < mapas[i].length; j++) {
+                for (int k = 0; k < mapas[j].length; k++) {
+                    System.out.print(mapas[i].length);
+                }
+                System.out.println("");
+            }
+            System.out.println("");
+
+        }
+        System.out.println("\n");
     }
 
     public static void comandos() {
